@@ -1,6 +1,7 @@
 from ippredictor.logger import logging
 from ippredictor.exception import IPPPredictorException
 import os, sys
+from ippredictor.utils import get_collection_as_data_frame
 
 def test_logger_and_exception():
     try:
@@ -13,4 +14,5 @@ def test_logger_and_exception():
         raise IPPPredictorException(e, sys)
     
 if __name__ == "__main__":
-    test_logger_and_exception()
+    #test_logger_and_exception()
+    get_collection_as_data_frame("INSURANCE","INSURANCE_DETAILS")
