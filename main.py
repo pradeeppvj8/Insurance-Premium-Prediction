@@ -4,6 +4,7 @@ import os, sys
 from ippredictor.utils import get_collection_as_data_frame
 from ippredictor.entity.config_entity import DataIngestionConfig
 from ippredictor.entity.config_entity import TrainingPipelineConfig
+from ippredictor.components.data_ingestion import DataIngestion
 
 def test_logger_and_exception():
     try:
@@ -20,4 +21,6 @@ if __name__ == "__main__":
     #get_collection_as_data_frame("INSURANCE","INSURANCE_DETAILS")
     training_pipeline_config = TrainingPipelineConfig()
     data_ingestion_config = DataIngestionConfig(training_pipeline_config=training_pipeline_config)
-    logging.info(data_ingestion_config.to_dict())
+    #logging.info(data_ingestion_config.to_dict())
+    data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config)
+    data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
