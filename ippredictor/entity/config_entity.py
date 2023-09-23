@@ -2,6 +2,7 @@ import os, sys
 from datetime import datetime
 from ippredictor.logger import logging
 from ippredictor.exception import IPPPredictorException
+from pathlib import Path
 
 FILE_NAME = "insurance.csv"
 TRAIN_FILE_NAME = "train.csv"
@@ -35,4 +36,11 @@ class DataIngestionConfig:
         except Exception as e:
             logging.error(e)
             raise IPPPredictorException(e, sys)
+        
+class DataValidationConfig:
+    def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifacts_dir, "data_validation")
+        self.report_file_path = os.path.join(self.data_validation_dir, "report.yaml")
+        self.missing_value_threshold : float = 0.2
+        self.base_df_path = Path("insurance.csv")
         

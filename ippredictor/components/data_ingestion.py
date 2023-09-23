@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 
 class DataIngestion:
     def __init__(self, data_ingestion_config: DataIngestionConfig):
+        logging.info("######### DataIngestion #########")
         try:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:

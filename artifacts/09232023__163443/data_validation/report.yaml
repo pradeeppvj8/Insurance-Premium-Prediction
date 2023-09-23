@@ -1,0 +1,102 @@
+data_drift_test_df:
+  age:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - &id001 !!python/object/apply:numpy.dtype
+      args:
+      - f8
+      - false
+      - true
+      state: !!python/tuple
+      - 3
+      - <
+      - null
+      - null
+      - null
+      - -1
+      - -1
+      - 0
+    - !!binary |
+      W6GVMAgt7D8=
+    same_distribution: true
+  bmi:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      M7lMRwdw6z8=
+    same_distribution: true
+  children:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      F+cR5YJU5z8=
+    same_distribution: true
+  expenses:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      KNpvow5V6j8=
+    same_distribution: true
+  region:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      jvLpDYzU7D8=
+    same_distribution: true
+  sex:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      7lgq1f//7z8=
+    same_distribution: true
+  smoker:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AAAAAAAA8D8=
+    same_distribution: true
+data_drift_train_df:
+  age:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      CTff+v//7z8=
+    same_distribution: true
+  bmi:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Uj5H7///7z8=
+    same_distribution: true
+  children:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      dGLFRvv/7z8=
+    same_distribution: true
+  expenses:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      g95quv//7z8=
+    same_distribution: true
+  region:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      NAl9/v//7z8=
+    same_distribution: true
+  sex:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AAAAAAAA8D8=
+    same_distribution: true
+  smoker:
+    pvalue: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AAAAAAAA8D8=
+    same_distribution: true
+missing_values_base_df: []
+missing_values_test_df: []
+missing_values_train_df: []
