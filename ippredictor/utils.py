@@ -69,3 +69,10 @@ def save_numpy_array_data(array_data, file_path):
             np.save(file_obj, array_data)
     except Exception as e:
         raise IPPPredictorException(e, sys)
+    
+def load_numpy_array_data(file_path:str) -> np.array:
+    try:
+        with open(file_path, "rb") as file_obj:
+            return np.load(file_obj)
+    except Exception as e:
+        raise IPPPredictorException(e, sys)

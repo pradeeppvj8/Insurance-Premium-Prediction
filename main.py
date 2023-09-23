@@ -2,11 +2,14 @@ from ippredictor.logger import logging
 from ippredictor.exception import IPPPredictorException
 import os, sys
 from ippredictor.utils import get_collection_as_data_frame
-from ippredictor.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
+from ippredictor.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
+                                              ModelTrainerConfig)
+
 from ippredictor.entity.config_entity import TrainingPipelineConfig
 from ippredictor.components.data_ingestion import DataIngestion
 from ippredictor.components.data_validation import DataValidation
 from ippredictor.components.data_transformation import DataTransformation
+from ippredictor.components.model_trainer import ModelTrainer
 
 def test_logger_and_exception():
     try:
@@ -36,9 +39,14 @@ if __name__ == "__main__":
     # Data Validation
     data_validation_config = DataValidationConfig(training_pipeline_config=training_pipeline_config)
     data_validation = DataValidation(data_validation_config= data_validation_config, data_ingestion_artifact=data_ingestion_artifact)
-    data_validation.initiate_data_validation()
+    data_validation_artifact = data_validation.initiate_data_validation()
 
     # Data Transformation
     data_transformation_config = DataTransformationConfig(training_pipeline_config)
     data_transformation = DataTransformation(data_transformation_config, data_ingestion_artifact)
-    data_transformation.initiate_data_transformation()
+    data_transformation_artifact = data_transformation.initiate_data_transformation()
+
+    # Model Training
+    model_trainer_config = ModelTrainerConfig(training_pipeline_config=training_pipeline_config)
+    model_trainer = ModelTrainer(model_trainer_config=model_trainer_config, data_transformation_artifact=data_transformation_artifact)
+    model_trainer_artifact = model_trainer.initiate_model_training()

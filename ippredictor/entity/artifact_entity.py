@@ -16,3 +16,9 @@ class DataTransformationArtifact:
     data_transformer_train_path: str
     data_transformer_test_path: str
     label_encoder_path: str
+
+@dataclass
+class ModelTrainerArtifact:
+    model_path: str
+    r2_score_train : float
+    r2_score_test : float
