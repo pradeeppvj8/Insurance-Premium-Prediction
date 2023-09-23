@@ -4,7 +4,8 @@ import os, sys
 from ippredictor.exception import IPPPredictorException
 from ippredictor.config import mongo_client
 from ippredictor.logger import logging
-import yaml
+import yaml, dill
+
 
 def get_collection_as_data_frame(database_name:str, collection_name:str) -> pd.DataFrame:
     try:
@@ -40,3 +41,31 @@ def write_yaml_file(file_path, data):
             yaml.dump(data, file_writer)
     except Exception as e:
             raise IPPPredictorException(e, sys)
+    
+def save_object(data, file_path):
+     try:
+          os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+          with open(file_path, "wb") as file_obj:
+               dill.dump(data, file_obj)
+     except Exception as e:
+        raise IPPPredictorException(e, sys)
+     
+def load_object(file_path):
+     try:
+          if not os.path.exists(file_path):
+            raise Exception(f"File Path : {file_path} does not exist")
+          
+          with open(file_path, "rb") as file_Obj:
+              return dill.load(file_Obj)
+     except Exception as e:
+        raise IPPPredictorException(e, sys)
+     
+def save_numpy_array_data(array_data, file_path):
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+        with open(file_path, "wb") as file_obj:
+            np.save(file_obj, array_data)
+    except Exception as e:
+        raise IPPPredictorException(e, sys)

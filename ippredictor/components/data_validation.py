@@ -13,7 +13,7 @@ class DataValidation:
     def __init__(self, data_validation_config: DataValidationConfig, 
                  data_ingestion_artifact: artifact_entity.DataIngestionArtifact):
         try:
-            logging.info("######### DataValidation #########")
+            logging.info("\n\n##################### Data Validation Stage Started #####################\n\n")
             self.data_validation_config = data_validation_config
             self.data_ingestion_artifact = data_ingestion_artifact
             self.validation_error = dict()
@@ -123,6 +123,7 @@ class DataValidation:
                 report_file_path=self.data_validation_config.report_file_path
             )
 
+            logging.info("\n\n##################### Data Validation Stage Ended #####################\n\n")
             return data_validation_artifact
         except Exception as e:
             raise IPPPredictorException(e, sys)

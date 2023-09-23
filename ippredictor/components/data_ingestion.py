@@ -10,12 +10,9 @@ from sklearn.model_selection import train_test_split
 
 class DataIngestion:
     def __init__(self, data_ingestion_config: DataIngestionConfig):
-        logging.info("######### DataIngestion #########")
-        try:
-            self.data_ingestion_config = data_ingestion_config
-        except Exception as e:
-            raise IPPPredictorException(e, sys)
-        
+        logging.info("\n\n##################### Data Ingestion Stage Started #####################\n\n")
+        self.data_ingestion_config = data_ingestion_config
+
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             logging.info("Exporting collection as dataframe")
@@ -51,6 +48,8 @@ class DataIngestion:
                 train_file_path=self.data_ingestion_config.train_file_path,
                 test_file_path=self.data_ingestion_config.test_file_path
             )
+
+            logging.info("\n\n##################### Data Ingestion Stage Ended #####################\n\n")
             return data_ingestion_artifact
         except Exception as e:
             raise IPPPredictorException(e, sys)
