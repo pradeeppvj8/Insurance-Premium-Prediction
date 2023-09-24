@@ -20,6 +20,7 @@ class ModelEvaluation:
         self.data_transformation_artifact = data_transformation_artifact
         self.model_trainer_artifact = model_trainer_artifact
         self.model_resolver = ModelResolver()
+        self.metrics_dict = dict()
 
     def initiate_model_evaluation(self) -> artifact_entity.ModelEvaluationArtifact:
         try:
@@ -30,7 +31,8 @@ class ModelEvaluation:
                     is_model_accepted=True,
                     improved_accuracy=None
                 )
-
+                
+                logging.info("Latest directory path is None")
                 logging.info("\n\n##################### Model Evaluation Stage Ended #####################\n\n")
                 return model_evaluation_artifact
             
@@ -75,6 +77,11 @@ class ModelEvaluation:
             if current_r2_score <= prev_r2_score:
                 logging.info("Current trained model is not better than previous model")
                 raise Exception("Current trained model is not better than previous model")
+            
+            logging.info("Saving metrics data into a file")
+            self.metrics_dict["Previous R2_Score"] = float(prev_r2_score)
+            self.metrics_dict["Current R2_Score"] = float(current_r2_score)
+            utils.write_yaml_file(self.model_evaluation_config.metrics_file_path, self.metrics_dict)
 
             model_evaluation_artifact = artifact_entity.ModelEvaluationArtifact(
                 is_model_accepted=True,

@@ -2,8 +2,9 @@ from ippredictor.entity import artifact_entity, config_entity
 from ippredictor.logger import logging
 from ippredictor.exception import IPPPredictorException
 import sys
-from sklearn.linear_model import LinearRegression
+import xgboost as xg
 from ippredictor import utils
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 class ModelTrainer:
@@ -15,9 +16,13 @@ class ModelTrainer:
 
     def train_model(self, X, y):
         try:
-            lr = LinearRegression()
-            lr.fit(X, y)
-            return lr
+            xgb_r = xg.XGBRegressor()
+            xgb_r.fit(X,y)
+            return xgb_r
+        
+            #lr = LinearRegression()
+            #lr.fit(X,y)
+            #return lr
         except Exception as e:
             raise IPPPredictorException(e, sys)
         

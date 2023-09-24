@@ -30,8 +30,8 @@ class ModelPusher:
 
         logging.info("Saving model, transformer & encoder in saved_models directory")
         save_object(model, self.model_resolver.get_latest_save_model_path())
-        save_object(encoder, self.model_resolver.get_latest_save_encoder_path())
-        save_object(transformer, self.model_resolver.get_latest_save_transformer_path())
+        save_object(encoder, self.model_resolver.get_latest_encoder_path())
+        save_object(transformer, self.model_resolver.get_latest_transformer_path())
 
         logging.info("Preparing model pusher artifact")
         model_pusher_artifact = ModelPusherArtifact(

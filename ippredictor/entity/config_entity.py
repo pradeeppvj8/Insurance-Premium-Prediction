@@ -64,6 +64,8 @@ class ModelTrainerConfig:
 
 class ModelEvaluationConfig:
     def __init__(self, training_pipeline_config : TrainingPipelineConfig):
+        self.model_eval_dir = os.path.join(training_pipeline_config.artifacts_dir, "model_evaluation")
+        self.metrics_file_path = os.path.join(self.model_eval_dir, "metrics.yaml")
         self.change_threshold = 0.01
 
 class ModelPusherConfig:
