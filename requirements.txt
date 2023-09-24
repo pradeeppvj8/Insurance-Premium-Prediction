@@ -17,4 +17,6 @@ PyYAML
 numpy
 scikit-learn
 apache-airflow
+streamlit
+
 -e .
