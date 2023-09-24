@@ -3,13 +3,14 @@ from ippredictor.exception import IPPPredictorException
 import os, sys
 from ippredictor.utils import get_collection_as_data_frame
 from ippredictor.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
-                                              ModelTrainerConfig)
+                                              ModelTrainerConfig, ModelEvaluationConfig)
 
 from ippredictor.entity.config_entity import TrainingPipelineConfig
 from ippredictor.components.data_ingestion import DataIngestion
 from ippredictor.components.data_validation import DataValidation
 from ippredictor.components.data_transformation import DataTransformation
 from ippredictor.components.model_trainer import ModelTrainer
+from ippredictor.components.model_evaluation import ModelEvaluation
 
 def test_logger_and_exception():
     try:
@@ -50,3 +51,11 @@ if __name__ == "__main__":
     model_trainer_config = ModelTrainerConfig(training_pipeline_config=training_pipeline_config)
     model_trainer = ModelTrainer(model_trainer_config=model_trainer_config, data_transformation_artifact=data_transformation_artifact)
     model_trainer_artifact = model_trainer.initiate_model_training()
+
+    # Model Evaluation
+    model_evaluation_config = ModelEvaluationConfig(training_pipeline_config=training_pipeline_config)
+    model_eval = ModelEvaluation(model_evaluation_config=model_evaluation_config,
+                                 data_ingestion_artifact=data_ingestion_config,
+                                 data_transformation_artifact=data_transformation_artifact,
+                                 model_trainer_artifact=model_trainer_artifact)
+    model_eval_artifact = model_eval.initiate_model_evaluation()
