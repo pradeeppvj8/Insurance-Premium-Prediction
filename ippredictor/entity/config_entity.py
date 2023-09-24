@@ -50,7 +50,7 @@ class DataValidationConfig:
 class DataTransformationConfig:
     def __init__(self, training_pipeline_config:TrainingPipelineConfig):
         self.data_transformation_dir = os.path.join(training_pipeline_config.artifacts_dir,"data_transformation")
-        self.data_transformer_object_path = os.path.join(self.data_transformation_dir, "transformed", TRANSFORMER_OBJECT_PATH)        
+        self.data_transformer_object_path = os.path.join(self.data_transformation_dir, "transformer", TRANSFORMER_OBJECT_PATH)        
         self.data_transformer_train_path = os.path.join(self.data_transformation_dir, "transformed", TRAIN_FILE_NAME.replace("csv","npz"))
         self.data_transformer_test_path = os.path.join(self.data_transformation_dir, "transformed", TEST_FILE_NAME.replace("csv","npz"))
         self.encoder_object_path = os.path.join(self.data_transformation_dir, "label_encoder", LABEL_ENCODER_PATH)
@@ -65,3 +65,12 @@ class ModelTrainerConfig:
 class ModelEvaluationConfig:
     def __init__(self, training_pipeline_config : TrainingPipelineConfig):
         self.change_threshold = 0.01
+
+class ModelPusherConfig:
+    def __init__(self, training_pipeline_config : TrainingPipelineConfig):
+        self.model_pusher_dir = os.path.join(training_pipeline_config.artifacts_dir, "model_pusher_file")
+        self.saved_model_dir = "saved_models"
+        self.pusher_model_dir = os.path.join(self.model_pusher_dir, "saved_models")
+        self.pusher_model_path = os.path.join(self.pusher_model_dir, MODEL_NAME) 
+        self.pusher_transformer_path = os.path.join(self.pusher_model_dir, TRANSFORMER_OBJECT_PATH) 
+        self.pusher_encoder_path = os.path.join(self.pusher_model_dir, LABEL_ENCODER_PATH) 

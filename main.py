@@ -3,7 +3,7 @@ from ippredictor.exception import IPPPredictorException
 import os, sys
 from ippredictor.utils import get_collection_as_data_frame
 from ippredictor.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
-                                              ModelTrainerConfig, ModelEvaluationConfig)
+                                              ModelTrainerConfig, ModelEvaluationConfig, ModelPusherConfig)
 
 from ippredictor.entity.config_entity import TrainingPipelineConfig
 from ippredictor.components.data_ingestion import DataIngestion
@@ -11,6 +11,7 @@ from ippredictor.components.data_validation import DataValidation
 from ippredictor.components.data_transformation import DataTransformation
 from ippredictor.components.model_trainer import ModelTrainer
 from ippredictor.components.model_evaluation import ModelEvaluation
+from ippredictor.components.model_pusher import ModelPusher
 
 def test_logger_and_exception():
     try:
@@ -59,3 +60,10 @@ if __name__ == "__main__":
                                  data_transformation_artifact=data_transformation_artifact,
                                  model_trainer_artifact=model_trainer_artifact)
     model_eval_artifact = model_eval.initiate_model_evaluation()
+
+    # Model Pusher
+    model_pusher_config = ModelPusherConfig(training_pipeline_config=training_pipeline_config)
+    model_pusher = ModelPusher(model_pusher_config=model_pusher_config, 
+                               data_transformation_artifact=data_transformation_artifact,
+                               model_trainer_artifact=model_trainer_artifact)
+    model_pusher_artifact = model_pusher.initiate_model_pusher()
